@@ -50,6 +50,7 @@ module.exports = {
     'spaced-comment': 'off',
     'handle-callback-err': 'off',
     'indent': ['warn', 2, { 'ignoreComments': true }],
+    'eol-last': 'warn'
   },
   parserOptions: {
     parser: 'babel-eslint'

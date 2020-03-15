@@ -1,6 +1,5 @@
 <template>
   <v-card>
-    <p>{{ email }} | {{ password }}</p>
     <v-toolbar color="pink">
       <v-toolbar-title>Login :)))))))</v-toolbar-title>
     </v-toolbar>
