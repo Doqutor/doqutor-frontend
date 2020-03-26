@@ -19,8 +19,8 @@
           fab
           bottom
           large
-          right>
-          <v-icon>mdi-plus</v-icon>
+          left>
+          <v-icon>mdi-pencil</v-icon>
         </v-btn>
       </template>
       <v-card>
@@ -45,7 +45,7 @@
         <v-card-actions>
           <v-spacer />
           <v-btn @click="dialog = false" color="red" text>Close</v-btn>
-          <v-btn @click="createDoctor" color="blue" text>Save</v-btn>
+          <v-btn @click="updateDoctor" color="blue" text>Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -54,6 +54,10 @@
 
 <script>
 export default {
+  props: {
+    id: String
+  },
+
   data: () => ({
     alert: { status: false },
 
@@ -64,7 +68,7 @@ export default {
   }),
 
   methods: {
-    async createDoctor() {
+    async updateDoctor() {
       const doctor = {
         name: this.name,
         age: this.age,
@@ -72,13 +76,43 @@ export default {
       }
 
       try {
-        await this.$axios.$post('https://00gwwcfkjk.execute-api.ap-southeast-2.amazonaws.com/prod/doctors', doctor)
+        await this.$axios.$put('https://00gwwcfkjk.execute-api.ap-southeast-2.amazonaws.com/prod/doctors' + this.id, doctor)
         this.alert = { status: true, message: 'Success', color: 'green' }
-        this.dialog = false
       } catch (err) {
-        this.alert = { status: true, message: 'There was an error creating this doctor', color: 'red' }
+        this.alert = { status: true, message: 'There was an error editing this doctor', color: 'red' }
       }
     }
   },
 }
 </script>
+
+<!--
+<template>
+  <v-btn
+    @click="updateDoctor"
+    color="orange"
+    fixed
+    dark
+    fab
+    bottom
+    large
+    left>
+    <v-icon>mdi-pencil</v-icon>
+  </v-btn>
+</template>
+
+<script>
+export default {
+  methods: {
+    async updateDoctor() {
+      await this.$axios.$put('https://00gwwcfkjk.execute-api.ap-southeast-2.amazonaws.com/prod/doctors/', {
+        id: '55b06d28',
+        name: 'Haha McLolface',
+        spec: 'Super gyno',
+        age: 3
+      })
+    }
+  },
+}
+</script>
+-->
