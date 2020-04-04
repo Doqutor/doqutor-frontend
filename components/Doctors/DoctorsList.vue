@@ -3,7 +3,7 @@
     <v-alert v-if="!doctors" type="info">Loading...</v-alert>
     <v-row v-else>
       <v-col  
-        v-for="doctor in doctors"
+        v-for="doctor in doctors.data"
         :key="doctor.id"
         cols="12" sm="6" md="4" lg="3">
         <DoctorsCard :doctor="doctor" nuxt :to="'/doctors/' + doctor.id" />
@@ -26,7 +26,11 @@ export default {
   }),
 
   async mounted() {
-    this.doctors = await this.$axios.$get(`${config.apiBase}/doctors`)
+    this.doctors = await this.$axios.$get(`${config.apiBase}/doctors`, { 
+      headers: {
+        authorization: `Bearer ${config.token}`
+      }
+    })
   },
 }
 </script>

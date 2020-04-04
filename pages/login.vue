@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import config from '@/lib/config'
+
 export default {
   data: () => ({
     email: '',
@@ -37,8 +39,15 @@ export default {
       alert('Submitted :))))')
     }
   },
-  created() {
-    console.log(location.hash);
+  middleware ({ store, redirect }) {
+    console.log(location.hash)
+    const urlParams = new URLSearchParams(window.location.hash.substring(1))
+    if (!urlParams.get('access_token') || !(urlParams.get('expires_in'))) {
+      alert('props don\'t exist')
+      return
+    }
+    config.setToken(urlParams.get('access_token'), parseInt(urlParams.get('expires_in')))
+    redirect('/')
   }
 }
 </script>
