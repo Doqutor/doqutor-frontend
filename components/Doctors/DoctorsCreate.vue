@@ -37,7 +37,10 @@
                 <v-text-field v-model.number="age" label="Age" />
               </v-col>
               <v-col cols="12" md="4">
-                <v-text-field v-model="spec" label="Spec" />
+                <v-text-field v-model="email" label="Email" />
+              </v-col>
+              <v-col cols="12" md="4">
+                <v-text-field v-model="phone_number" label="Phone number" />
               </v-col>
             </v-row>
           </v-container>
@@ -53,6 +56,8 @@
 </template>
 
 <script>
+import config from '@/lib/config'
+
 export default {
   data: () => ({
     alert: { status: false },
@@ -60,7 +65,8 @@ export default {
     dialog: false,
     name: null,
     age: null,
-    spec: null,
+    email: null,
+    phone_number: null,
   }),
 
   methods: {
@@ -68,11 +74,12 @@ export default {
       const doctor = {
         name: this.name,
         age: this.age,
-        spec: this.spec,
+        email: this.email,
+        phone_number: this.phone_number,
       }
 
       try {
-        await this.$axios.$post('https://00gwwcfkjk.execute-api.ap-southeast-2.amazonaws.com/prod/doctors', doctor)
+        await this.$axios.$post(`${config.apiBase}/doctors`, doctor)
         this.alert = { status: true, message: 'Success', color: 'green' }
         this.dialog = false
       } catch (err) {

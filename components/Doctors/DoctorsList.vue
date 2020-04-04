@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import config from '@/lib/config'
 import DoctorsCard from '@/components/Doctors/DoctorsCard'
 
 export default {
@@ -25,7 +26,7 @@ export default {
   }),
 
   async mounted() {
-    this.doctors = await this.$axios.$get('https://00gwwcfkjk.execute-api.ap-southeast-2.amazonaws.com/prod/doctors')
+    this.doctors = await this.$axios.$get(`${config.apiBase}/doctors`)
   },
 }
 </script>

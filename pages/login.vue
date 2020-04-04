@@ -37,5 +37,8 @@ export default {
       alert('Submitted :))))')
     }
   },
+  created() {
+    console.log(location.hash);
+  }
 }
 </script>

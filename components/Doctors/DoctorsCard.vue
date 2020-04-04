@@ -8,7 +8,7 @@
     <v-card-title>{{ doctor.name }} ({{ doctor.age }})</v-card-title>
 
     <v-card-text>
-      {{ doctor.spec }}
+      {{ doctor.email }} {{ doctor.phone }}
     </v-card-text>
   </v-card>
 </template>

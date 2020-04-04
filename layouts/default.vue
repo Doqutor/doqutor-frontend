@@ -16,7 +16,7 @@
         <v-icon>mdi-home</v-icon>
       </v-btn>
 
-      <v-btn icon nuxt to="/login">
+      <v-btn icon nuxt :href="login">
         <v-icon>mdi-lock</v-icon>
       </v-btn>
 
@@ -34,24 +34,15 @@
 </template>
 
 <script>
+import config from '@/lib/config'
+
 export default {
   data () {
     return {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
+      login: config.loginEndpoint,
       miniVariant: false,
       right: true,
       rightDrawer: false,

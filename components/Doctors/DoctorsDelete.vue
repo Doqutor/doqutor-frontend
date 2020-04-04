@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import config from '@/lib/config'
+
 export default {
   props: {
     id: String
@@ -35,13 +37,14 @@ export default {
     dialog: false,
     name: null,
     age: null,
-    spec: null,
+    email: null,
+    phone: null,
   }),
 
   methods: {
     async deleteDoctor() {
       try {
-        await this.$axios.$delete('https://00gwwcfkjk.execute-api.ap-southeast-2.amazonaws.com/prod/doctors' + this.id)
+        await this.$axios.$delete(`${config.apiBase}/doctors/` + this.id)
         this.alert = { status: true, message: 'Success', color: 'green' }
       } catch (err) {
         this.alert = { status: true, message: 'There was an error deleting this doctor', color: 'red' }

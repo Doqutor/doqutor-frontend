@@ -8,7 +8,7 @@
     <v-card-title>{{ doctor.name }} ({{ doctor.age }})</v-card-title>
 
     <v-card-text>
-      {{ doctor.spec }}
+      {{ doctor.email }}
     </v-card-text>
   </v-card>
 </template>
@@ -19,7 +19,8 @@ export default {
     doctor: {
       name: 'Phil',
       age: 3,
-      field: 'gyno'
+      email: 'gyno@test.com',
+      phone_number: '+61400000000'
     }
   }),
 }
