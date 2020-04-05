@@ -10,7 +10,7 @@
       </v-btn>
     </v-snackbar>
     <v-btn
-      @click="deleteDoctor"
+      @click="deletePatient"
       color="red"
       fixed
       dark
@@ -42,7 +42,7 @@ export default {
   }),
 
   methods: {
-    async deleteDoctor() {
+    async deletePatient() {
       const opts = { 
         headers: {
           authorization: `Bearer ${config.token}`
@@ -50,10 +50,10 @@ export default {
       }
 
       try {
-        await this.$axios.$delete(`${config.apiBase}/doctors/` + this.id, opts)
+        await this.$axios.$delete(`${config.apiBase}/patients/` + this.id, opts)
         this.alert = { status: true, message: 'Success', color: 'green' }
       } catch (err) {
-        this.alert = { status: true, message: 'There was an error deleting this doctor', color: 'red' }
+        this.alert = { status: true, message: 'There was an error deleting this patient', color: 'red' }
       }
     }
   },

@@ -19,13 +19,13 @@
           fab
           bottom
           large
-          right>
-          <v-icon>mdi-plus</v-icon>
+          left>
+          <v-icon>mdi-pencil</v-icon>
         </v-btn>
       </template>
       <v-card>
         <v-card-title>
-          <span class="headline">Create Doctor</span>
+          <span class="headline">Create Patient</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -48,7 +48,7 @@
         <v-card-actions>
           <v-spacer />
           <v-btn @click="dialog = false" color="red" text>Close</v-btn>
-          <v-btn @click="createDoctor" color="blue" text>Save</v-btn>
+          <v-btn @click="updatePatient" color="blue" text>Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -59,6 +59,10 @@
 import config from '@/lib/config'
 
 export default {
+  props: {
+    id: String
+  },
+
   data: () => ({
     alert: { status: false },
 
@@ -70,12 +74,12 @@ export default {
   }),
 
   methods: {
-    async createDoctor() {
-      const doctor = {
+    async updatePatient() {
+      const patient = {
         name: this.name,
         age: this.age,
-        email: this.email,
-        phone_number: this.phone_number,
+        email: null,
+        phone_number: null,
       }
 
       const opts = { 
@@ -85,11 +89,10 @@ export default {
       }
 
       try {
-        await this.$axios.$post(`${config.apiBase}/doctors`, doctor, opts)
+        await this.$axios.$put(`${config.apiBase}/patients/` + this.id, patient, opts)
         this.alert = { status: true, message: 'Success', color: 'green' }
-        this.dialog = false
       } catch (err) {
-        this.alert = { status: true, message: 'There was an error creating this doctor', color: 'red' }
+        this.alert = { status: true, message: 'There was an error editing this patient', color: 'red' }
       }
     }
   },

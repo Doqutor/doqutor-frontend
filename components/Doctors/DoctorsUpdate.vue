@@ -3,9 +3,9 @@
     <v-snackbar v-model="alert.status">
       {{ alert.message }}
       <v-btn
+        @click="alert = { status: false }"
         color="pink"
-        text
-        @click="alert = { status: false }">
+        text>
         Close
       </v-btn>
     </v-snackbar>

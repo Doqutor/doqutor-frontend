@@ -25,7 +25,7 @@
       </template>
       <v-card>
         <v-card-title>
-          <span class="headline">Create Doctor</span>
+          <span class="headline">Create Patient</span>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -48,7 +48,7 @@
         <v-card-actions>
           <v-spacer />
           <v-btn @click="dialog = false" color="red" text>Close</v-btn>
-          <v-btn @click="createDoctor" color="blue" text>Save</v-btn>
+          <v-btn @click="createPatient" color="blue" text>Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -70,8 +70,8 @@ export default {
   }),
 
   methods: {
-    async createDoctor() {
-      const doctor = {
+    async createPatient() {
+      const patient = {
         name: this.name,
         age: this.age,
         email: this.email,
@@ -85,11 +85,11 @@ export default {
       }
 
       try {
-        await this.$axios.$post(`${config.apiBase}/doctors`, doctor, opts)
+        await this.$axios.$post(`${config.apiBase}/patients`, patient, opts)
         this.alert = { status: true, message: 'Success', color: 'green' }
         this.dialog = false
       } catch (err) {
-        this.alert = { status: true, message: 'There was an error creating this doctor', color: 'red' }
+        this.alert = { status: true, message: 'There was an error creating this Patient', color: 'red' }
       }
     }
   },

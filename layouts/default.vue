@@ -21,7 +21,11 @@
       </v-btn>
 
       <v-btn icon nuxt to="/doctors">
-        <v-icon>mdi-dots-vertical</v-icon>
+        <v-icon>mdi-doctor</v-icon>
+      </v-btn>
+
+      <v-btn icon nuxt to="/patients">
+        <v-icon>mdi-account</v-icon>
       </v-btn>
     </v-app-bar>
     
