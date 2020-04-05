@@ -82,8 +82,14 @@ export default {
         phone_number: null,
       }
 
+      const opts = { 
+        headers: {
+          authorization: `Bearer ${config.token}`
+        }
+      }
+
       try {
-        await this.$axios.$put(`${config.apiBase}/doctors/` + this.id, doctor)
+        await this.$axios.$put(`${config.apiBase}/doctors/` + this.id, doctor, opts)
         this.alert = { status: true, message: 'Success', color: 'green' }
       } catch (err) {
         this.alert = { status: true, message: 'There was an error editing this doctor', color: 'red' }
@@ -92,34 +98,3 @@ export default {
   },
 }
 </script>
-
-<!--
-<template>
-  <v-btn
-    @click="updateDoctor"
-    color="orange"
-    fixed
-    dark
-    fab
-    bottom
-    large
-    left>
-    <v-icon>mdi-pencil</v-icon>
-  </v-btn>
-</template>
-
-<script>
-export default {
-  methods: {
-    async updateDoctor() {
-      await this.$axios.$put('https://00gwwcfkjk.execute-api.ap-southeast-2.amazonaws.com/prod/doctors/', {
-        id: '55b06d28',
-        name: 'Haha McLolface',
-        spec: 'Super gyno',
-        age: 3
-      })
-    }
-  },
-}
-</script>
--->

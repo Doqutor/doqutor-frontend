@@ -78,8 +78,14 @@ export default {
         phone_number: this.phone_number,
       }
 
+      const opts = { 
+        headers: {
+          authorization: `Bearer ${config.token}`
+        }
+      }
+
       try {
-        await this.$axios.$post(`${config.apiBase}/doctors`, doctor)
+        await this.$axios.$post(`${config.apiBase}/doctors`, doctor, opts)
         this.alert = { status: true, message: 'Success', color: 'green' }
         this.dialog = false
       } catch (err) {

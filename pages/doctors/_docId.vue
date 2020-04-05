@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import config from '@/lib/config'
+
 import DoctorsCard from '@/components/Doctors/DoctorsCard'
 import DoctorsUpdate from '@/components/Doctors/DoctorsUpdate'
 import DoctorsDelete from '@/components/Doctors/DoctorsDelete'
@@ -28,7 +30,14 @@ export default {
 
   async mounted() {
     this.docId = this.$route.params.docId
-    this.doctor = await this.$axios.$get('https://00gwwcfkjk.execute-api.ap-southeast-2.amazonaws.com/prod/doctors/' + this.docId)
+
+    const opts = { 
+      headers: {
+        authorization: `Bearer ${config.token}`
+      }
+    }
+
+    this.doctor = await this.$axios.$get('https://00gwwcfkjk.execute-api.ap-southeast-2.amazonaws.com/prod/doctors/' + this.docId, opts)
   },
 }
 </script>

@@ -26,11 +26,13 @@ export default {
   }),
 
   async mounted() {
-    this.doctors = await this.$axios.$get(`${config.apiBase}/doctors`, { 
+    const opts = { 
       headers: {
         authorization: `Bearer ${config.token}`
       }
-    })
+    }
+
+    this.doctors = await this.$axios.$get(`${config.apiBase}/doctors`, opts)
   },
 }
 </script>
