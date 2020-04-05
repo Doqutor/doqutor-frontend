@@ -89,7 +89,7 @@ export default {
       }
 
       try {
-        await this.$axios.$put(`${config.apiBase}/patients/` + this.id, patient, opts)
+        await this.$axios.$put('/patients' + this.id, patient, opts)
         this.alert = { status: true, message: 'Success', color: 'green' }
       } catch (err) {
         this.alert = { status: true, message: 'There was an error editing this patient', color: 'red' }

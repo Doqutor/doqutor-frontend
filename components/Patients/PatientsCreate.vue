@@ -85,7 +85,7 @@ export default {
       }
 
       try {
-        await this.$axios.$post(`${config.apiBase}/patients`, patient, opts)
+        await this.$axios.$post('/patients', patient, opts)
         this.alert = { status: true, message: 'Success', color: 'green' }
         this.dialog = false
       } catch (err) {

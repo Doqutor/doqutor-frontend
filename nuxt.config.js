@@ -1,3 +1,4 @@
+
 import colors from 'vuetify/es5/util/colors'
 
 export default {
@@ -53,6 +54,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    baseURL: 'https://z6ic8f3hn0.execute-api.ap-southeast-2.amazonaws.com/prod',
   },
   /*
   ** vuetify module configuration

@@ -32,7 +32,7 @@ export default {
       }
     }
 
-    this.doctors = await this.$axios.$get(`${config.apiBase}/doctors`, opts)
+    this.doctors = await this.$axios.$get('/doctors', opts)
   },
 }
 </script>
