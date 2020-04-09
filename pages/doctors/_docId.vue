@@ -37,7 +37,7 @@ export default {
       }
     }
 
-    this.doctor = await this.$axios.$get('https://00gwwcfkjk.execute-api.ap-southeast-2.amazonaws.com/prod/doctors/' + this.docId, opts)
+    this.doctor = await this.$axios.$get('/doctors/' + this.docId, opts)
   },
 }
 </script>

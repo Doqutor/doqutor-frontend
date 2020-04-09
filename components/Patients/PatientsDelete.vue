@@ -50,7 +50,7 @@ export default {
       }
 
       try {
-        await this.$axios.$delete('/patients' + this.id, opts)
+        await this.$axios.$delete('/patients/' + this.id, opts)
         this.alert = { status: true, message: 'Success', color: 'green' }
       } catch (err) {
         this.alert = { status: true, message: 'There was an error deleting this patient', color: 'red' }

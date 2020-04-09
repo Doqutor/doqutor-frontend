@@ -3,7 +3,7 @@
     <v-alert v-if="!patient" type="info">Loading...</v-alert>
     <div v-else>
       <PatientsCard :patient="patient" max-width="400" class="mx-auto" />
-      <PatientsUpdate v-if="docId" :id="docId" />
+      <PatientsUpdate v-if="patientId" :id="patientId" />
       <PatientsDelete />
     </div>
   </div>
@@ -24,12 +24,12 @@ export default {
   },
 
   data: () => ({
-    docId: null,
+    patientId: null,
     patient: null
   }),
 
   async mounted() {
-    this.docId = this.$route.params.patientId
+    this.patientId = this.$route.params.patientId
 
     const opts = { 
       headers: {
@@ -37,7 +37,7 @@ export default {
       }
     }
 
-    this.patient = await this.$axios.$get('https://00gwwcfkjk.execute-api.ap-southeast-2.amazonaws.com/prod/patients/' + this.patientId, opts)
+    this.patient = await this.$axios.$get('/patients/' + this.patientId, opts)
   },
 }
 </script>
