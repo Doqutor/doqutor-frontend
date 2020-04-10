@@ -1,0 +1,183 @@
+{
+  "Parameters" : {
+    "ParamDomainName": {
+      "Type" : "String",
+      "Default" : "prod.aws9447.me",
+      "Description" : "Root domain name for hosting application"
+    },
+    "ParamCFCertificateARN": {
+      "Type": "String",
+      "Description": "ARN of certificate for cloudfront."
+    }
+  },
+  "Resources": {
+    "FrontendCFAccessIdentity": {
+      "Type" : "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+      "Properties" : {
+          "CloudFrontOriginAccessIdentityConfig" : {
+            "Comment": "Read access for FrontendCF"
+          }
+        }
+    },
+    "FrontendCF": {
+      "Type": "AWS::CloudFront::Distribution",
+      "Properties": {
+        "DistributionConfig": {
+          "Aliases": [
+            {
+              "Ref": "ParamDomainName"
+            }
+          ],
+          "DefaultRootObject": "index.html",
+          "Origins": [
+            {
+              "Id": "S3-frontend",
+              "DomainName": {
+                "Fn::Join": [
+                  "", [
+                    {
+                      "Ref": "FrontendS3Bucket"
+                    },
+                    ".s3.ap-southeast-2.amazonaws.com"
+                  ]
+                ]
+                
+              },
+              "OriginPath": "",
+              "S3OriginConfig": {
+                "OriginAccessIdentity": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "origin-access-identity/cloudfront/",
+                      {
+                        "Ref": "FrontendCFAccessIdentity"
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ],
+          "DefaultCacheBehavior": {
+            "TargetOriginId": "S3-frontend",
+            "ForwardedValues": {
+              "QueryString": false,
+              "Cookies": {
+                "Forward": "none"
+              }
+            },
+            "ViewerProtocolPolicy": "redirect-to-https",
+            "MinTTL": 0,
+            "AllowedMethods": [
+              "HEAD",
+              "GET"
+            ],
+            "CachedMethods": [
+              "HEAD",
+              "GET"
+            ],
+            "DefaultTTL": 86400,
+            "MaxTTL": 31536000,
+            "Compress": true,
+          },
+          "CustomErrorResponses": [
+            {
+              "ErrorCode": 403,
+              "ResponsePagePath": "/200.html",
+              "ResponseCode": "200",
+              "ErrorCachingMinTTL": 300
+            },
+            {
+              "ErrorCode": 404,
+              "ResponsePagePath": "/200.html",
+              "ResponseCode": "200",
+              "ErrorCachingMinTTL": 300
+            }
+          ],
+          "Comment": "",
+          "PriceClass": "PriceClass_All",
+          "Enabled": true,
+          "ViewerCertificate": {
+            "AcmCertificateArn": {
+              "Ref": "ParamCFCertificateARN"
+            },
+            "SslSupportMethod": "sni-only",
+            "MinimumProtocolVersion": "TLSv1.1_2016"
+          },
+          "HttpVersion": "http2"
+        }
+      }
+    },
+    "FrontendS3Bucket": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "AccessControl": "Private",
+        "VersioningConfiguration": {
+          "Status": "Suspended"
+        }
+      }
+    },
+    "FrontendDNSRecord": {
+      "Type" : "AWS::Route53::RecordSet",
+      "Properties" : {
+          "Comment" : "doqutore-frontend cloudfront distrubution",
+          "Name" : {
+            "Ref": "ParamDomainName"
+          },
+          "AliasTarget": {
+            "DNSName": {
+              "Fn::GetAtt": [
+                "FrontendCF",
+                "DomainName"
+              ]
+            }
+          }
+        }
+    },
+    "FrontendS3BucketPolicy": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "FrontendS3Bucket"
+        },
+        "PolicyDocument": {
+          "Version": "2008-10-17",
+          "Id": "PolicyForCloudFrontPrivateContent",
+          "Statement": [
+            {
+              "Sid": "1",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    " ",
+                    [
+                      "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity",
+                      {
+                        "Ref": "FrontendCFAccessIdentity"
+                      }
+                    ]
+                  ]
+                }
+              },
+              "Action": "s3:GetObject",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:aws:s3:::",
+                    {
+                      "Ref": "FrontendS3Bucket"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
