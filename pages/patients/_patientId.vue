@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-alert v-if="!patient" type="info">Loading...</v-alert>
+    <v-alert v-if="error" type="error">Error: {{ error }}</v-alert>
+    <v-alert v-if="!patients" type="info">Loading...</v-alert>
     <div v-else>
       <PatientsCard :patient="patient" max-width="400" class="mx-auto" />
       <PatientsUpdate v-if="patientId" :id="patientId" />
@@ -25,7 +26,8 @@ export default {
 
   data: () => ({
     patientId: null,
-    patient: null
+    patient: null,
+    error: null,
   }),
 
   async mounted() {
@@ -37,7 +39,12 @@ export default {
       }
     }
 
-    this.patient = await this.$axios.$get('/patients/' + this.patientId, opts)
+    try {
+      this.patient = await this.$axios.$get('/patients/' + this.patientId, opts)
+    } catch (e) {
+      if (e.response && e.response.data && e.response.data.error) this.error = e.response.data.error
+      else this.error = 'An unknown error occurred.'
+    }
   },
 }
 </script>
