@@ -2,7 +2,7 @@
   "Parameters" : {
     "ParamDomainName": {
       "Type" : "String",
-      "Default" : "prod.aws9447.me",
+      "Default" : ".aws9447.me",
       "Description" : "Root domain name for hosting application"
     },
     "ParamCFCertificateARN": {
@@ -12,10 +12,6 @@
     "ParamZoneId": {
       "Type": "String",
       "Description": "Hosted zone id to place domain name"
-    },
-    "ParamRestAPIId": {
-      "Type": "String",
-      "Description": "API Gateway REST API id"
     }
   },
   "Resources": {
@@ -81,7 +77,7 @@
             ],
             "DefaultTTL": 86400,
             "MaxTTL": 31536000,
-            "Compress": true,
+            "Compress": true
           },
           "CustomErrorResponses": [
             {
@@ -275,7 +271,7 @@
       "Type" : "AWS::ApiGateway::BasePathMapping",
       "Properties" : {
         "DomainName" : { "Ref": "FrontendAPIGatewayDomain" },
-        "RestApiId" : { "Ref": "ParamRestAPIId" },
+        "RestApiId" : { "Fn::ImportValue" : "DoqutoreAPIGateway" },
         "Stage" : "prod"
       }
     },
