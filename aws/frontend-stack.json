@@ -271,7 +271,7 @@
       "Type" : "AWS::ApiGateway::BasePathMapping",
       "Properties" : {
         "DomainName" : { "Ref": "FrontendAPIGatewayDomain" },
-        "RestApiId" : { "Fn::ImportValue" : "DoqutoreAPIGateway" },
+        "RestApiId" : { "Fn::ImportValue" : "doqutore-infrastructure-APIGateway" },
         "Stage" : "prod"
       }
     },
