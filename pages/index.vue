@@ -19,5 +19,11 @@ export default {
       LOGIN_URL_D: process.env.LOGIN_URL_D,
     }
   },
+  mounted() {
+    console.log('LOGIN_URL_A', this.LOGIN_URL_A)
+    console.log('LOGIN_URL_B', this.LOGIN_URL_B)
+    console.log('LOGIN_URL_C', this.LOGIN_URL_C)
+    console.log('LOGIN_URL_D', this.LOGIN_URL_D)
+  }
 }
 </script>
