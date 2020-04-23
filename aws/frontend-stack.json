@@ -75,8 +75,8 @@
               "HEAD",
               "GET"
             ],
-            "DefaultTTL": 86400,
-            "MaxTTL": 31536000,
+            "DefaultTTL": 60,
+            "MaxTTL": 86400,
             "Compress": true
           },
           "CustomErrorResponses": [
