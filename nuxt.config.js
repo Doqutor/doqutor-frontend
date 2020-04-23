@@ -54,7 +54,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    // baseURL: 'https://api.dev.aws9447.me/',
+    baseURL: `https://api.${process.env.LOGIN_URL}.aws9447.me/`,
   },
   /*
   ** vuetify module configuration
