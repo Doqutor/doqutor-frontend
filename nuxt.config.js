@@ -79,7 +79,7 @@ export default {
   },
 
   env: {
-    LOGIN_URL: process.env.URL,
+    LOGIN_URL: process.env.LOGIN_URL,
   },
 
   firebase: {
