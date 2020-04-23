@@ -54,7 +54,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: process.env.baseURL
+    baseURL: `https://api.${process.env.LOGIN_URL}.aws9447.me/`,
   },
   /*
   ** vuetify module configuration
@@ -76,6 +76,10 @@ export default {
         }
       }
     }
+  },
+
+  env: {
+    LOGIN_URL: process.env.LOGIN_URL,
   },
 
   firebase: {

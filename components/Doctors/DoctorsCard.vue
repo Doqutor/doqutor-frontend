@@ -17,6 +17,6 @@
 export default {
   props: {
     doctor: Object,
-  }
+  },
 }
 </script>
