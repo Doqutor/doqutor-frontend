@@ -4,6 +4,7 @@
       height="250"
       src="https://ktar.com/wp-content/uploads/2020/03/coronavirus-doctor-sampe-getty.jpg"
     />
+    LOGIN_URL: {{ LOGIN_URL }}
 
     <v-card-title>{{ doctor.name }} ({{ doctor.age }})</v-card-title>
 
@@ -17,6 +18,12 @@
 export default {
   props: {
     doctor: Object,
-  }
+  },
+
+  data() {
+    return {
+      LOGIN_URL: process.env.LOGIN_URL,
+    }
+  },
 }
 </script>

@@ -78,6 +78,10 @@ export default {
     }
   },
 
+  env: {
+    LOGIN_URL: process.env.URL,
+  },
+
   firebase: {
     config: {
       apiKey: 'AIzaSyDaZjGlHhxzzE_t5urc78voyktFOH-BINI',

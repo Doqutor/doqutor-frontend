@@ -28,6 +28,8 @@ jobs:
     - run: npm install
 
     - run: npm run generate
+      env:
+        LOGIN_URL: lol
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
