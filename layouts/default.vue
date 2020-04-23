@@ -38,8 +38,6 @@
 </template>
 
 <script>
-import config from '@/lib/config'
-
 export default {
   data () {
     return {
@@ -56,7 +54,9 @@ export default {
   computed: {
     login() {
       const subdom = process.env.LOGIN_URL
-      return `https://login-doqutore-infrastructure-${subdom}.auth.ap-southeast-2.amazoncognito.com/login?client_id=1l26brptvhg0hhricpnno0h45d&response_type=token&scope=doqutore/application&redirect_uri=https://${subdom}.aws9447.me/login`
+      const fullUri = `https://login-doqutore-infrastructure-${subdom}.auth.ap-southeast-2.amazoncognito.com/login?client_id=1l26brptvhg0hhricpnno0h45d&response_type=token&scope=doqutore/application&redirect_uri=https://${subdom}.aws9447.me/login`
+      console.log('fullUri', fullUri)
+      return fullUri
     }
   }
 }
