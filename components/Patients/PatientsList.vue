@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <v-alert v-if="error" type="error">Error: {{ error }}</v-alert>
     <v-alert v-if="!patients" type="info">Loading...</v-alert>
     <v-row v-else>
       <v-col  
@@ -22,7 +23,8 @@ export default {
   },
 
   data: () => ({
-    patients: null
+    patients: null,
+    error: null,
   }),
 
   async mounted() {
@@ -31,8 +33,12 @@ export default {
         authorization: `Bearer ${config.token}`
       }
     }
-
-    this.patients = await this.$axios.$get('/patients', opts)
+    try {
+      this.patients = await this.$axios.$get('/patients', opts)
+    } catch (e) {
+      if (e.response && e.response.data && e.response.data.error) this.error = e.response.data.error
+      else this.error = 'An unknown error occurred.'
+    }
   },
 }
 </script>

@@ -2,7 +2,7 @@
   "Parameters" : {
     "ParamDomainName": {
       "Type" : "String",
-      "Default" : "prod.aws9447.me",
+      "Default" : ".aws9447.me",
       "Description" : "Root domain name for hosting application"
     },
     "ParamCFCertificateARN": {
@@ -12,10 +12,6 @@
     "ParamZoneId": {
       "Type": "String",
       "Description": "Hosted zone id to place domain name"
-    },
-    "ParamRestAPIId": {
-      "Type": "String",
-      "Description": "API Gateway REST API id"
     }
   },
   "Resources": {
@@ -81,7 +77,7 @@
             ],
             "DefaultTTL": 86400,
             "MaxTTL": 31536000,
-            "Compress": true,
+            "Compress": true
           },
           "CustomErrorResponses": [
             {
@@ -140,6 +136,63 @@
         }
       }
     },
+    "FrontendBucketDeploymentPolicy": {
+      "Type" : "AWS::IAM::Policy",
+      "Properties" : {
+        "PolicyName": "FrontendBucketDeployment",
+        "Users": [
+          {"Ref": "FrontendDeploymentUser"}
+        ],
+        "PolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:DeleteObject",
+                "s3:ListBucket"
+              ],
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      { "Ref": "FrontendS3Bucket" }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      { "Ref": "FrontendS3Bucket" },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },   
+    "FrontendDeploymentUser": {
+      "Type" : "AWS::IAM::User",
+      "Properties" : {
+        "UserName" : "frontend-deployment"
+      }
+    },
+    "FrontendDeploymentUserAccessKey": {
+      "Type" : "AWS::IAM::AccessKey",
+      "Properties" : {
+          "Serial" : 1,
+          "UserName" : {"Ref" : "FrontendDeploymentUser"}
+        }
+    },    
     "FrontendS3BucketPolicy": {
       "Type": "AWS::S3::BucketPolicy",
       "Properties": {
@@ -218,7 +271,7 @@
       "Type" : "AWS::ApiGateway::BasePathMapping",
       "Properties" : {
         "DomainName" : { "Ref": "FrontendAPIGatewayDomain" },
-        "RestApiId" : { "Ref": "ParamRestAPIId" },
+        "RestApiId" : { "Fn::ImportValue" : "doqutore-infrastructure-APIGateway" },
         "Stage" : "prod"
       }
     },
@@ -249,9 +302,17 @@
     }
   },
   "Outputs" : {
-    "FrontendBucketName" : {
+    "BucketName" : {
       "Description": "Bucket name for frontend assets",  
       "Value" : { "Ref": "FrontendS3Bucket" }
+    },
+    "DeployAccessKeyId" : {
+      "Description": "public key for deployment user",  
+      "Value" : { "Ref": "FrontendDeploymentUserAccessKey" }
+    },
+    "DeployAccessKeySecret" : {
+      "Description": "private key for deployment user",  
+      "Value" : { "Fn::GetAtt": ["FrontendDeploymentUserAccessKey", "SecretAccessKey"] }
     }
   }
 }
