@@ -28,7 +28,7 @@
         <v-icon>mdi-account</v-icon>
       </v-btn>
     </v-app-bar>
-    
+
     <v-content>
       <v-container>
         <nuxt />
@@ -46,11 +46,19 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      login: config.loginEndpoint,
       miniVariant: false,
       right: true,
       rightDrawer: false,
       title: 'Vuetify.js'
+    }
+  },
+
+  computed: {
+    login() {
+      const subdom = process.env.LOGIN_URL
+      console.log('haha', subdom)
+      console.log('rip', this.process.env.LOGIN_URL)
+      return `https://login-doqutore-infrastructure-${subdom}.auth.ap-southeast-2.amazoncognito.com/login?client_id=1l26brptvhg0hhricpnno0h45d&response_type=token&scope=doqutore/application&redirect_uri=https://${subdom}.aws9447.me/login`
     }
   }
 }

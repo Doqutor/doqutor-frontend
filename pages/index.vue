@@ -1,9 +1,6 @@
 <template>
   <div>
-    <p>LOGIN_URL_A: {{ LOGIN_URL_A }}</p>
-    <p>LOGIN_URL_B: {{ LOGIN_URL_B }}</p>
-    <p>LOGIN_URL_C: {{ LOGIN_URL_C }}</p>
-    <p>LOGIN_URL_D: {{ LOGIN_URL_D }}</p>
+    <p>LOGIN_URL: {{ LOGIN_URL }}</p>
   </div>
 </template>
 
@@ -13,17 +10,8 @@
 export default {
   data() {
     return {
-      LOGIN_URL_A: process.env.LOGIN_URL_A,
-      LOGIN_URL_B: process.env.LOGIN_URL_B,
-      LOGIN_URL_C: process.env.LOGIN_URL_C,
-      LOGIN_URL_D: process.env.LOGIN_URL_D,
+      LOGIN_URL: process.env.LOGIN_URL,
     }
   },
-  mounted() {
-    console.log('LOGIN_URL_A', this.LOGIN_URL_A)
-    console.log('LOGIN_URL_B', this.LOGIN_URL_B)
-    console.log('LOGIN_URL_C', this.LOGIN_URL_C)
-    console.log('LOGIN_URL_D', this.LOGIN_URL_D)
-  }
 }
 </script>
