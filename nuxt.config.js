@@ -54,7 +54,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'https://api.dev.aws9447.me/',
+    // baseURL: 'https://api.dev.aws9447.me/',
   },
   /*
   ** vuetify module configuration
@@ -66,7 +66,7 @@ export default {
       dark: true,
       themes: {
         dark: {
-          primary: colors.green.darken2,
+          primary: colors.blue.darken2,
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,

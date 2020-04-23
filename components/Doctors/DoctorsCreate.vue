@@ -61,6 +61,7 @@ import config from '@/lib/config'
 export default {
   data: () => ({
     alert: { status: false },
+    baseUrl: null,
 
     dialog: false,
     name: null,
@@ -68,6 +69,11 @@ export default {
     email: null,
     phone_number: null,
   }),
+
+  // mounted() {
+  //   console.log(111, this.$route.host)
+  //   this.baseUrl = 'https://api.dev.aws9447.me/'
+  // },
 
   methods: {
     async createDoctor() {
@@ -86,6 +92,7 @@ export default {
 
       try {
         await this.$axios.$post('/doctors', doctor, opts)
+        // await this.$axios.$post(this.baseUrl + '/doctors', doctor, opts)
         this.alert = { status: true, message: 'Success', color: 'green' }
         this.dialog = false
       } catch (err) {
