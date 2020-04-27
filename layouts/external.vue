@@ -61,6 +61,7 @@ export default {
 
   mounted() {
     if (process.browser) {
+      this.token = window.localStorage.getItem('config:token')
       setInterval(() => {
         this.token = window.localStorage.getItem('config:token')
       }, 500)
