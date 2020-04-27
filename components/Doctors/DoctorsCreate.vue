@@ -70,11 +70,6 @@ export default {
     phone_number: null,
   }),
 
-  // mounted() {
-  //   console.log(111, this.$route.host)
-  //   this.baseUrl = 'https://api.dev.aws9447.me/'
-  // },
-
   methods: {
     async createDoctor() {
       const doctor = {
