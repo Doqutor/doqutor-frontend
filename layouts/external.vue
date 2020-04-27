@@ -12,16 +12,20 @@
         <v-icon>mdi-home</v-icon>
       </v-btn>
 
-      <v-btn icon nuxt :href="login">
-        <v-icon>mdi-lock</v-icon>
-      </v-btn>
-
       <v-btn v-if="token" icon nuxt to="/doctors">
         <v-icon>mdi-doctor</v-icon>
       </v-btn>
 
       <v-btn v-if="token" icon nuxt to="/patients">
         <v-icon>mdi-account</v-icon>
+      </v-btn>
+
+      <v-btn v-if="token" color="red" icon nuxt @click="logout()">
+        <v-icon>mdi-logout</v-icon>
+      </v-btn>
+
+      <v-btn v-else color="green" icon nuxt :href="login">
+        <v-icon>mdi-lock</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -59,6 +63,12 @@ export default {
     if (process.browser) {
       this.token = window.localStorage.getItem('config:token')
     }
-  }
+  },
+
+  methods: {
+    logout() {
+      window.localStorage.setItem('config:token', null)
+    }
+  },
 }
 </script>
