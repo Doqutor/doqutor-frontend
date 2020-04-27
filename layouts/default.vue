@@ -61,16 +61,16 @@ export default {
   },
 
   mounted() {
-    setInterval(() => {
-      if (process.browser) {
+    if (process.browser) {
+      setInterval(() => {
         this.token = window.localStorage.getItem('config:token')
-      }
-    }, 100)
+      }, 500)
+    }
   },
-
+  
   methods: {
     logout() {
-      window.localStorage.setItem('config:token', null)
+      window.localStorage.removeItem('config:token')
       this.$router.push('/')
       this.token = null
     }

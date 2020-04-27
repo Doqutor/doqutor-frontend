@@ -59,10 +59,9 @@ export default {
     }
   },
 
-   mounted() {
+  mounted() {
     if (process.browser) {
       setInterval(() => {
-        console.log('lol')
         this.token = window.localStorage.getItem('config:token')
       }, 500)
     }
@@ -70,7 +69,7 @@ export default {
 
   methods: {
     logout() {
-      window.localStorage.setItem('config:token', null)
+      window.localStorage.removeItem('config:token')
       this.$router.push('/')
       this.token = null
     }
