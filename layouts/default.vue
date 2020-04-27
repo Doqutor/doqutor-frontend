@@ -20,11 +20,11 @@
         <v-icon>mdi-account</v-icon>
       </v-btn>
 
-      <v-btn v-if="token" color="green" icon nuxt @click="logout()">
+      <v-btn v-if="token" color="red" icon nuxt @click="logout()">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
 
-      <v-btn v-else color="red" icon nuxt :href="login">
+      <v-btn v-else color="green" icon nuxt :href="login">
         <v-icon>mdi-lock</v-icon>
       </v-btn>
     </v-app-bar>
