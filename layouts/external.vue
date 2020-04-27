@@ -68,6 +68,8 @@ export default {
   methods: {
     logout() {
       window.localStorage.setItem('config:token', null)
+      this.$router.push('/')
+      this.token = null
     }
   },
 }
