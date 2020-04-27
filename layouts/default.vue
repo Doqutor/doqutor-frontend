@@ -20,11 +20,11 @@
         <v-icon>mdi-lock</v-icon>
       </v-btn>
 
-      <v-btn icon nuxt to="/doctors">
+      <v-btn v-if="token" icon nuxt to="/doctors">
         <v-icon>mdi-doctor</v-icon>
       </v-btn>
 
-      <v-btn icon nuxt to="/patients">
+      <v-btn v-if="token" icon nuxt to="/patients">
         <v-icon>mdi-account</v-icon>
       </v-btn>
     </v-app-bar>
@@ -41,6 +41,7 @@
 export default {
   data () {
     return {
+      token: null,
       clipped: false,
       drawer: false,
       fixed: false,
@@ -48,6 +49,12 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'Vuetify.js'
+    }
+  },
+
+  mounted() {
+    if (process.browser) {
+      this.token = window.localStorage.getItem('config:token')
     }
   },
 
