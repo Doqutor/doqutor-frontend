@@ -59,9 +59,12 @@ export default {
     }
   },
 
-  mounted() {
+   mounted() {
     if (process.browser) {
-      this.token = window.localStorage.getItem('config:token')
+      setInterval(() => {
+        console.log('lol')
+        this.token = window.localStorage.getItem('config:token')
+      }, 500)
     }
   },
 

@@ -61,9 +61,11 @@ export default {
   },
 
   mounted() {
-    if (process.browser) {
-      this.token = window.localStorage.getItem('config:token')
-    }
+    setInterval(() => {
+      if (process.browser) {
+        this.token = window.localStorage.getItem('config:token')
+      }
+    }, 100)
   },
 
   methods: {
