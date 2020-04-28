@@ -20,7 +20,7 @@
         <v-icon>mdi-account</v-icon>
       </v-btn>
 
-      <v-btn v-if="token" @click="logout()" color="red" icon nuxt>
+      <v-btn v-if="token" color="red" icon nuxt @click="logout()">
         <v-icon>mdi-logout</v-icon>
       </v-btn>
 
@@ -54,7 +54,6 @@ export default {
     login() {
       const subdom = process.env.LOGIN_URL
       const fullUri = `https://login-doqutore-infrastructure-${subdom}.auth.ap-southeast-2.amazoncognito.com/login?client_id=1l26brptvhg0hhricpnno0h45d&response_type=token&scope=doqutore/application&redirect_uri=https://${subdom}.aws9447.me/login`
-      console.log('fullUri', fullUri)
       return fullUri
     }
   },
