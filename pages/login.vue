@@ -28,7 +28,6 @@
 
 <script>
 import config from '@/lib/config'
-
 export default {
   data: () => ({
     email: '',
@@ -40,7 +39,6 @@ export default {
     }
   },
   middleware ({ store, redirect }) {
-    console.log(location.hash)
     const urlParams = new URLSearchParams(window.location.hash.substring(1))
     if (!urlParams.get('access_token') || !(urlParams.get('expires_in'))) {
       alert('props don\'t exist')
