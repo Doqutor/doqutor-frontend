@@ -7,9 +7,9 @@ name: generate and deploy to master
 
 # on: [push, repository_dispatch]
 on:
-  - repository_dispatch
-  - push:
-    branches: [ preprod ]
+  repository_dispatch:
+  push:
+      branches: [ preprod ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
