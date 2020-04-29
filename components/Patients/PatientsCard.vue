@@ -9,7 +9,7 @@
 
     <v-card-text>
       {{ patient.email }}
-      <br />
+      <br>
       {{ patient.phone }}
     </v-card-text>
   </v-card>

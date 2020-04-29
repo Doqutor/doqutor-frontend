@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-alert v-if="error" type="error">Error: {{ error }}</v-alert>
-    <v-alert v-if="!patients" type="info">Loading...</v-alert>
+    <v-alert v-if="!patient" type="info">Loading...</v-alert>
     <div v-else>
       <PatientsCard :patient="patient" max-width="400" class="mx-auto" />
       <!-- <PatientsUpdate v-if="patientId" :id="patientId" />
