@@ -4,8 +4,8 @@
     <v-alert v-if="!patients" type="info">Loading...</v-alert>
     <div v-else>
       <PatientsCard :patient="patient" max-width="400" class="mx-auto" />
-      <PatientsUpdate v-if="patientId" :id="patientId" />
-      <PatientsDelete />
+      <!-- <PatientsUpdate v-if="patientId" :id="patientId" />
+      <PatientsDelete /> -->
     </div>
   </div>
 </template>
@@ -14,14 +14,14 @@
 import config from '@/lib/config'
 
 import PatientsCard from '@/components/Patients/PatientsCard'
-import PatientsUpdate from '@/components/Patients/PatientsUpdate'
-import PatientsDelete from '@/components/Patients/PatientsDelete'
+// import PatientsUpdate from '@/components/Patients/PatientsUpdate'
+// import PatientsDelete from '@/components/Patients/PatientsDelete'
 
 export default {
   components: {
     PatientsCard,
-    PatientsUpdate,
-    PatientsDelete,
+    // PatientsUpdate,
+    // PatientsDelete,
   },
 
   data: () => ({
@@ -40,7 +40,8 @@ export default {
     }
 
     try {
-      this.patient = await this.$axios.$get('/patients/' + this.patientId, opts)
+      const patient = await this.$axios.$get('/patients/' + this.patientId, opts)
+      this.patient = patient.data
     } catch (e) {
       if (e.response && e.response.data && e.response.data.error) this.error = e.response.data.error
       else this.error = 'An unknown error occurred.'

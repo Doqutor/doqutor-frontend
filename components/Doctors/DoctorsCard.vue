@@ -5,10 +5,12 @@
       src="https://ktar.com/wp-content/uploads/2020/03/coronavirus-doctor-sampe-getty.jpg"
     />
 
-    <v-card-title>{{ doctor.name }} ({{ doctor.age }})</v-card-title>
+    <v-card-title>{{ doctor.name }}</v-card-title>
 
     <v-card-text>
-      {{ doctor.email }} {{ doctor.phone }}
+      {{ doctor.email }}
+      <br />
+      {{ doctor.phone }}
     </v-card-text>
   </v-card>
 </template>

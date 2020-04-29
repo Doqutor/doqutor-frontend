@@ -1,18 +1,18 @@
 <template>
   <div>
     <DoctorsList />
-    <DoctorsCreate />
+    <!-- <DoctorsCreate /> -->
   </div>
 </template>
 
 <script>
 import DoctorsList from '@/components/Doctors/DoctorsList'
-import DoctorsCreate from '@/components/Doctors/DoctorsCreate'
+// import DoctorsCreate from '@/components/Doctors/DoctorsCreate'
 
 export default {
   components: {
     DoctorsList,
-    DoctorsCreate,
+    // DoctorsCreate,
   }
 }
 </script>
