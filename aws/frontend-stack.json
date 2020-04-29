@@ -75,8 +75,8 @@
               "HEAD",
               "GET"
             ],
-            "DefaultTTL": 60,
-            "MaxTTL": 86400,
+            "DefaultTTL": 0,
+            "MaxTTL": 3600,
             "Compress": true
           },
           "CustomErrorResponses": [
@@ -304,7 +304,10 @@
   "Outputs" : {
     "BucketName" : {
       "Description": "Bucket name for frontend assets",  
-      "Value" : { "Ref": "FrontendS3Bucket" }
+      "Value" : { "Ref": "FrontendS3Bucket" },
+      "Export": {
+      	"Name": "doqutore-frontend-S3Bucket"
+      }
     },
     "DeployAccessKeyId" : {
       "Description": "public key for deployment user",  
