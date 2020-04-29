@@ -73,6 +73,6 @@ export default {
       this.$router.push('/')
       this.token = null
     }
-  },
+  }
 }
 </script>
