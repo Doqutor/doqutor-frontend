@@ -2,7 +2,7 @@
 
 > Doqutore is built with Vue as the javascript framework, Vuetify as the component library and Nuxt as the server-side rendering framework. It uses the exposed HTTPS endpoints from AWS Lambdas functions for the API calls and also uses Github Actions for CI/CD deployments to AWS S3 buckets.
 
-[Demo UI](/)
+[Demo UI](https://doqutor.github.io/)
 
 ## Manual deployment
 
